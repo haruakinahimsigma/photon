@@ -16,15 +16,15 @@ uniform vec2 resolution;
 uniform float time;
 uniform float yaw;
 uniform float zoom;
-float hash21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float hash21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=vec2(dot(p,p+vec2(45.32)));return fract(p.x*p.y);}
 float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash21(i),hash21(i+vec2(1,0)),f.x),mix(hash21(i+vec2(0,1)),hash21(i+vec2(1.)),f.x),f.y);}
 vec3 starfield(vec2 p){
  vec3 col=vec3(.0015,.002,.004);
  for(int layer=0;layer<3;layer++){
   float scale=90.+float(layer)*75.; vec2 cell=floor(p*scale),f=fract(p*scale)-.5;
-  float h=hash21(cell+float(layer)*71.7); float size=mix(.008,.027,hash21(cell+8.1));
+  float h=hash21(cell+vec2(float(layer)*71.7)); float size=mix(.008,.027,hash21(cell+vec2(8.1)));
   float star=1.-smoothstep(size,size+.018,length(f)); float twinkle=.72+.28*sin(time*(.7+h*1.8)+h*30.);
-  vec3 tint=mix(vec3(.48,.61,.9),vec3(1.,.78,.58),hash21(cell+4.2)); col+=tint*star*pow(h,13.)*twinkle*2.8;
+  vec3 tint=mix(vec3(.48,.61,.9),vec3(1.,.78,.58),hash21(cell+vec2(4.2))); col+=tint*star*pow(h,13.)*twinkle*2.8;
  }
  float neb=noise(p*5.)*.5+noise(p*12.)*.2; col+=vec3(.025,.018,.035)*neb; return col;
 }
