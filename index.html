@@ -1,40 +1,62 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#050609">
-  <title>PHOTON — Relativistic Observatory</title>
+  <title>LIMINAL — Mathematical Worlds</title>
+  <meta name="description" content="An interactive exploration of impossible mathematical worlds, rendered in real time with WebGL2.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <main class="observatory">
-    <canvas id="universe" aria-label="Interactive black hole gravitational lensing simulation"></canvas>
-    <div class="vignette"></div>
-    <header class="topbar">
-      <a class="wordmark" href="./"><span class="mark">P</span><span>PHOTON</span></a>
-      <div class="top-meta"><span class="live-dot"></span> REAL-TIME RELATIVISTIC RENDER</div>
-      <button class="icon-button" id="pause" aria-label="Pause simulation" title="Pause simulation">Ⅱ</button>
-    </header>
-    <section class="hero-copy">
-      <p class="eyebrow">FIELD STUDY 001 <span>／</span> SCHWARZSCHILD SPACETIME</p>
-      <h1>Beyond the<br><em>event horizon.</em></h1>
-      <p class="intro">An interactive study of light, gravity, and curved spacetime.</p>
-    </section>
-    <section class="readout">
-      <div><span class="readout-label">MODEL</span><strong>SCHWARZSCHILD</strong></div>
-      <div><span class="readout-label">SCHWARZSCHILD RADIUS</span><strong>1.00 <small>rₛ</small></strong></div>
-      <div><span class="readout-label">PHOTON SPHERE</span><strong>1.50 <small>rₛ</small></strong></div>
-    </section>
-    <footer class="bottom">
-      <span>PHOTON / A COMPUTATIONAL ASTROPHYSICS PROJECT</span>
-      <span class="hint">DRAG TO ORBIT <i>·</i> SCROLL TO ZOOM</span>
-    </footer>
-    <div class="crosshair" aria-hidden="true"><span></span><span></span></div>
+  <canvas id="world" aria-label="Interactive mathematical fractal world"></canvas>
+  <div class="vignette"></div>
+  <header class="topbar">
+    <a class="brand" href="./"><span class="brand-mark">L</span><span>LIMINAL</span></a>
+    <div class="top-meta"><span class="live-dot"></span><span>REALTIME MATHEMATICAL RENDER</span><span id="fps">-- FPS</span></div>
+    <button class="icon-button" id="panel-toggle" aria-label="Toggle controls">☷</button>
+  </header>
+  <main class="hero">
+    <div class="eyebrow"><span>01 / FRACTAL STUDY</span><span class="line"></span><span id="scene-name">THE MANDELBULB</span></div>
+    <h1>Beyond the<br><em>familiar.</em></h1>
+    <p class="intro">A world without walls. A shape without an edge.<br>Every surface, born from an equation.</p>
+    <div class="hero-bottom"><span class="scroll-cue">DRAG TO EXPLORE <b>↗</b></span><span class="coordinate" id="coords">φ 1.618 · θ 0.000</span></div>
   </main>
+  <aside class="control-panel" id="controls">
+    <div class="panel-head"><div><span class="panel-kicker">FLIGHT DECK</span><h2>Parameters</h2></div><button id="close-panel" class="close-button" aria-label="Close controls">×</button></div>
+    <div class="control-group">
+      <div class="control-label"><label for="power">Fractal power</label><output id="power-value">8.0</output></div>
+      <input id="power" type="range" min="2" max="12" step="0.1" value="8">
+    </div>
+    <div class="control-group">
+      <div class="control-label"><label for="detail">Iteration depth</label><output id="detail-value">12</output></div>
+      <input id="detail" type="range" min="5" max="18" step="1" value="12">
+    </div>
+    <div class="control-group">
+      <div class="control-label"><label for="zoom">Distance</label><output id="zoom-value">4.8</output></div>
+      <input id="zoom" type="range" min="2.4" max="9" step="0.1" value="4.8">
+    </div>
+    <div class="control-group">
+      <div class="control-label"><label for="glow">Luminance</label><output id="glow-value">1.2</output></div>
+      <input id="glow" type="range" min="0.2" max="2.5" step="0.1" value="1.2">
+    </div>
+    <div class="control-group">
+      <span class="control-label static-label">Chromatic field</span>
+      <div class="swatches" id="palettes">
+        <button class="swatch active" data-palette="0" aria-label="Polar"></button>
+        <button class="swatch" data-palette="1" aria-label="Ember"></button>
+        <button class="swatch" data-palette="2" aria-label="Ultraviolet"></button>
+        <button class="swatch" data-palette="3" aria-label="Monochrome"></button>
+      </div>
+    </div>
+    <div class="panel-actions"><button id="auto" class="action-button active">AUTO ORBIT <span>ON</span></button><button id="reset" class="action-button">RESET VIEW ↺</button></div>
+    <p class="panel-hint">MOUSE DRAG · ROTATE<br>SCROLL · DOLLY · SPACE · PAUSE</p>
+  </aside>
+  <footer class="footer"><span>AN EXPLORATION OF THE INFINITE</span><span>WEBGL 2.0 <i> / </i> GLSL ES 3.00</span></footer>
+  <div class="loading" id="loading"><div class="loader-ring"></div><span>GENERATING SPACE</span></div>
   <script type="module" src="./src/main.js"></script>
 </body>
 </html>
