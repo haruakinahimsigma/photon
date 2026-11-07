@@ -3,12 +3,12 @@ const pauseButton = document.querySelector("#pause");
 const gl = canvas.getContext("webgl2", { antialias: true, alpha: false, powerPreference: "high-performance" });
 if (!gl) throw new Error("PHOTON requires WebGL 2.");
 
-const vertexSource = \`#version 300 es
+const vertexSource = `#version 300 es
 in vec2 position;
 out vec2 uv;
-void main(){ uv=position*.5+.5; gl_Position=vec4(position,0.,1.); }\`;
+void main(){ uv=position*.5+.5; gl_Position=vec4(position,0.,1.); }`;
 
-const fragmentSource = \`#version 300 es
+const fragmentSource = `#version 300 es
 precision highp float;
 in vec2 uv;
 out vec4 outColor;
@@ -17,7 +17,7 @@ uniform float time;
 uniform float yaw;
 uniform float zoom;
 float hash21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
-float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash21(i),hash21(i+vec2(1,0)),f.x),mix(hash21(i+vec2(0,1)),hash21(i+1.),f.x),f.y);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash21(i),hash21(i+vec2(1,0)),f.x),mix(hash21(i+vec2(0,1)),hash21(i+vec2(1.)),f.x),f.y);}
 vec3 starfield(vec2 p){
  vec3 col=vec3(.0015,.002,.004);
  for(int layer=0;layer<3;layer++){
@@ -59,7 +59,7 @@ void main(){
  col+=col*col*.11; col=col/(1.+col); col=pow(max(col,vec3(0.)),vec3(.88));
  col*=1.-.34*smoothstep(.25,.9,length(screen)); col+=vec3(.0015,.0013,.0011);
  outColor=vec4(col,1.);
-}\`;
+}`;
 
 function compile(type, source) {
  const shader=gl.createShader(type); gl.shaderSource(shader,source); gl.compileShader(shader);
