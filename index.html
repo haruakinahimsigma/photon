@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#050609">
+  <title>PHOTON — Relativistic Observatory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="observatory">
+    <canvas id="universe" aria-label="Interactive black hole gravitational lensing simulation"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <a class="wordmark" href="./"><span class="mark">P</span><span>PHOTON</span></a>
+      <div class="top-meta"><span class="live-dot"></span> REAL-TIME RELATIVISTIC RENDER</div>
+      <button class="icon-button" id="pause" aria-label="Pause simulation" title="Pause simulation">Ⅱ</button>
+    </header>
+    <section class="hero-copy">
+      <p class="eyebrow">FIELD STUDY 001 <span>／</span> SCHWARZSCHILD SPACETIME</p>
+      <h1>Beyond the<br><em>event horizon.</em></h1>
+      <p class="intro">An interactive study of light, gravity, and curved spacetime.</p>
+    </section>
+    <section class="readout">
+      <div><span class="readout-label">MODEL</span><strong>SCHWARZSCHILD</strong></div>
+      <div><span class="readout-label">SCHWARZSCHILD RADIUS</span><strong>1.00 <small>rₛ</small></strong></div>
+      <div><span class="readout-label">PHOTON SPHERE</span><strong>1.50 <small>rₛ</small></strong></div>
+    </section>
+    <footer class="bottom">
+      <span>PHOTON / A COMPUTATIONAL ASTROPHYSICS PROJECT</span>
+      <span class="hint">DRAG TO ORBIT <i>·</i> SCROLL TO ZOOM</span>
+    </footer>
+    <div class="crosshair" aria-hidden="true"><span></span><span></span></div>
+  </main>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
